@@ -1,0 +1,209 @@
+body {
+    margin: 0;
+    padding: 0% 3% ;
+    height: 100%;
+    width: 100%;
+}
+.row {
+    padding: 0% 10%;
+}
+hr {
+    overflow: visible; /* For IE */
+    height: 30px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px 0 0 0;
+    border-radius: 20px;
+}
+hr:before { /* Not really supposed to work, but does */
+    display: block;
+    content: "";
+    height: 30px;
+    margin-top: -31px;
+    border-style: solid;
+    border-color: black;
+    border-width: 0 0 1px 0;
+    border-radius: 20px;
+}
+a:hover {
+    text-decoration: none;
+}
+.jumbotron {
+    background-color: transparent;
+    /* padding: 5% 10%; */
+
+}
+.navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+
+  
+.navbar_item {
+    float: left;
+
+  }
+  
+  li a {
+    display: block;
+    color: #111;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+li a:hover {
+    background-color: #da6;
+    text-decoration: none;
+    color:white;
+  }
+.active {
+    background-color: #824;
+    color:white;
+  }
+.name_color {
+    color:  #623;
+}
+
+.left_column {
+    padding: 1rem;
+    padding-left: 5rem;
+}
+.intro_text {
+    text-align: justify;
+}
+
+.my_image {
+    border-radius: 50%;
+    border-color: #da6;
+    border-style: solid;
+    border-width: 0.5rem;
+}
+.image_container {
+    padding: 3rem;
+}
+.info_text {
+    font-size: 14px !important;
+    color:#623;   
+
+}
+.custom_padding {
+    margin-top: 2rem;
+}
+.icon_color_burgundy{
+    color:#623;
+}
+.right_container {
+    padding: 1rem;
+    padding-left: 5rem;
+    padding-top: 3rem;
+    text-align: right;
+}
+.center_title {
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 2rem;
+}
+.text_centered {
+    text-align: center;
+    font-size: 2rem;
+}
+.text_large_bold {
+    font-weight: bold;
+    font-size: 2rem;
+}
+.text_medium {
+    font-size: 1.8rem;
+}
+.flex-container {
+    display: flex;
+    font-size: 1.3rem;
+    flex-flow: column;
+  }
+  .custom_color_beige {
+    color: #da6;
+  }
+
+.flex_container2 {
+    flex-direction: row;
+    flex-wrap: wrap;
+    display: inline-flex;
+    border: 1px solid #da6;
+ 
+    border-radius: 8vh;
+    padding: 2.5%;
+  }
+
+.skill_container {
+      padding: 3rem;
+  }
+.rounded {
+    margin: 0.5rem;
+    width: max-content;
+    background: #da6;
+    border-radius: 8vh;
+    padding: 0.5rem 1rem;
+    color: white;
+  }
+.text_start {
+    text-align: start;
+}
+
+.achievment_list_item {
+    list-style: none;
+}
+
+.link_color_custom {
+    color:#666;
+}
+.project_list_item {
+    display: list-item;
+    list-style-type: disc;
+    padding-left: 5%;
+}
+.first {
+    list-style: none;
+}
+.text_small {
+    font-size: 1.5rem;
+}
+
+.project_container {
+    border: 1px solid red;
+}
+.fa {
+    padding-top: 0.3rem;
+}
+.checked {
+    color: #da6;
+  }
+.custom_inline_items {
+    display: flex;
+}
+.custom_padding_right {
+    padding-right: 1rem;
+}
+.rounded_no_fill {
+    margin: 0.5rem;
+    width: max-content;
+    background: transparent;
+    border-radius: 8vh;
+    padding: 0.5rem 1rem;
+    color: #666;    
+    border: 1px solid #da6;
+}
+.text_large {
+    font-size: 2rem;
+}
+footer {
+    padding-bottom: 3rem;
+}
+.container_center_text {
+    text-align: center;
+}

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Action Page</title>
+  <meta charset="utf-8">
+  <meta name="author" content="Damir Seferagic">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/actionStyle.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <script language="javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="app.js"></script>
+
+</head>
+<body ng-app="subscriberListApp" ng-controller="SubscriberListController">
+<div class="menu">
+        <ul class="navbar_action">
+            <li class="navbar_item"><a href="index.html">Home</a></li>
+            <li class="navbar_item"><a href="action.html" class="active">Action</a></li>
+        </ul>
+    </div>   
+<div class="jumbotron text-center" style="margin-bottom:0" class="jumbotronBackgroundColor">
+  <h1>Demo Page</h1>
+  <p>The purpose of this page is to demonstrate the use of public REST API that returns JSON data.
+     Enter the minimum and maximum number of subscribers and hit the generate button.
+     Website will autogenerate a random number of subscribers between the two values you have provided. 
+     You can also use the blue add button to create new custom subscribers. Try it out! </p>
+</div>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" ng-hide="hideOnDesktop()">
+  <button class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" class="navItem">
+        <a class="nav-link"
+          data-toggle="modal"
+          data-target="#addSubscriberModal"
+          href="#">Add Subscribers</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input ng-model="filterText" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0 button_burgundy" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<div class="table-responsive" class="subscriberTable">
+  <div class = "tableTopHeader form-inlineS">
+    <div id="left">
+      <h2>Subscribers</h2>
+    </div>
+
+      <div ng-hide="hideOnPhone()">
+        <form class="form-inline my-2 my-lg-0 middle">
+          <input ng-model="filterText" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0 button_burgundy" type="submit">Search</button>
+        </form>
+      </div>
+
+    <div id="right" ng-hide="hideOnPhone()">
+      <label class="labelText">Add Subscribers</label>
+      <a class="btn-floating btn-small waves-effect waves-light blue"
+         data-toggle="modal"
+         data-target="#addSubscriberModal"
+         href="#"><i class="material-icons">+</i></a>
+    </div>
+
+  </div>
+
+  <div class="input_area">
+    <div class="col-sm-4 ">
+      <span class="input-min-number">Minimum number*</span>
+      <input ng-model="inputValueMin" name="minMumber" type="text" class="form-control" id="input-min-number" placeholder="Enter minimum number" required>   
+    </div>
+  
+    <div class="col-sm-4">
+      <span class="input-max-number">Maximum number*</span>
+      <input name="maxNumber" ng-model="inputValuemax" type="text" class="form-control" id="input-max-number" placeholder="Enter maximum number" required>   
+    </div>
+    <div class="col-sm-4 generate_button_class">
+      <button class="btn btn-danger button_burgundy" ng-click="loadData(inputValueMin, inputValuemax)">Generate</button> 
+    </div>
+
+  </div>
+
+  <table ng-init="" class="table">
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <th ng-hide="hideOnPhone()">Phone Number</th>
+        <th ng-hide="hideOnPhone()">Email</th>
+        <th ng-hide="hideOnPhone()">Address</th>
+        <th>Subscription</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="subscriber in subscribers | filterSubscribers:filterText">
+        <td>{{subscriber.name.firstName}} {{subscriber.name.lastName}}</td>
+        <td ng-hide="hideOnPhone()"><a href="tel:{{subscriber.phone}}">{{subscriber.phone}}</a></td>
+        <td ng-hide="hideOnPhone()"><a href="mailto:{{subscriber.email}}">{{subscriber.email}}</a></td>
+        <td ng-hide="hideOnPhone()">{{subscriber.address.postcode}} {{subscriber.address.city}} {{subscriber.address.state}} {{subscriber.address.street}}</a></td>
+        <td>DKK {{subscriber.subscription}}</td>
+        <td><button class="btn btn-danger button_burgundy" ng-click="removeSubscriber(subscriber.id)">Remove</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+    <div class="modal fade" id="addSubscriberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add new subscriber</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                    </div>
+                    <div class="modal-body">
+                        <form name="addUserForm">
+
+                          <span style="color:red" ng-show="fieldValidation('username')">Username is required.</span>
+                          <div class="input-group">
+                              <span class="input-group-addon">Username*</span>
+                              <input ng-model="user.login.username" name="username" type="text" class="form-control" id="input-name" placeholder="Enter Username" required>
+                          </div>
+                          <span style="color:red" ng-show="fieldValidation('firstname')">First Name is required.</span>
+                          <div class="input-group">
+                              <span class="input-group-addon">First Name*</span>
+                              <input ng-model="user.name.first" name="firstname" type="text" class="form-control" id="input-name" placeholder="Enter First Name" required>
+                          </div>
+                          <span style="color:red" ng-show="fieldValidation('lastname')">Last Name is required.</span>
+                          <div class="input-group">
+                              <span class="input-group-addon">Last Name*</span>
+                              <input ng-model="user.name.last" name="lastname" type="text" class="form-control" id="input-name" placeholder="Enter Last Name" required>
+                          </div>
+                          <span style="color:red" ng-show="fieldValidation('email')">Email is required.</span>
+                          <div class="input-group">
+                              <span class="input-group-addon">Email*</span>
+                              <input ng-model="user.email" name="email" type="email" class="form-control" id="input-email" placeholder="Enter Email" required>
+                          </div>
+                          <span style="color:red" ng-show="fieldValidation('phone')">Phone Number is required.</span>
+                          <div class="input-group">
+                              <span class="input-group-addon">Phone Number*</span>
+                              <input ng-model="user.phone" name="phone" type="text" class="form-control" id="input-phone" placeholder="Enter Phone Number" required>
+                          </div>
+                          <span style="color:red" ng-show="fieldValidation('city')">City is required.</span>
+                          <div class="input-group">
+                              <span class="input-group-addon">City*</span>
+                              <input ng-model="user.location.city" name="city" type="text" class="form-control" id="input-city" placeholder="Enter City" required>
+                          </div>
+                          <span style="color:red" ng-show="fieldValidation('postcode')">Postcode is required.</span>
+                          <div class="input-group">
+                              <span class="input-group-addon">Postcode*</span>
+                              <input ng-model="user.location.postcode" name="postcode" type="text" class="form-control" id="input-postcode" placeholder="Enter Postcode" required>
+                          </div>
+                          <span style="color:red" ng-show="fieldValidation('street')">Street is required.</span>
+                          <div class="input-group">
+                              <span class="input-group-addon">Street*</span>
+                              <input ng-model="user.location.street" name="street" type="text" class="form-control" id="input-street" placeholder="Enter Street" required>
+                          </div>
+                          <span style="color:red" ng-show="fieldValidation('subscription')">Select the desired subscription.</span>
+                          <select class="form-control" name="subscription" id="input-subscription" ng-model="user.subscription" required>
+                              <option>One month subscription</option>
+                              <option>Yearly subscription</option>
+                          </select>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary button_burgundy" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary button_burgundy" ng-disabled="addUserForm.$invalid" ng-click="addSubscriber(user)" disabled>Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+  </body>
+
+<div class="jumbotron text-center" style="margin-bottom:0">
+
+  <h4>The total of monthly subscriptions : ${{totalMonthlySubscriptions()}}, There are {{getNumberOfMonthlySubscriptions()}} monthly subscribers</h4>
+  <h4>The total of yearly subscriptions : ${{totalYearlySubscriptions()}}, There are {{getNumberOfYearlySubscriptions()}} yearly subscribers</h4>
+
+</div>
+
+</body>
+</html>

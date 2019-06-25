@@ -99,11 +99,13 @@ subscriberListApp.controller('SubscriberListController', function SubscriberList
 }
 
     $scope.loadData = function(min, max) {
-        var numberOfSubscribers = Math.floor(Math.random() * (max - min) + min);
+        var minNumber = parseInt(min);
+        var maxNumber = parseInt(max);
+        var numberOfSubscribers = Math.floor(Math.random() * (maxNumber - minNumber) + maxNumber);
         if (max === 0 && min === 0) {
           alert ("Enter minimum and maximum number!");
           return;
-        } else if (min > max) {
+        } else if (minNumber > maxNumber) {
           alert ("Maximum number must be greater or equal to minimum")
           return;
         } else {

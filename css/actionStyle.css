@@ -1,7 +1,7 @@
 html,
 body {
     margin: 0;
-    padding: 0;
+    padding: 0% 3% ;
     height: 100%;
     width: 100%;
 }
@@ -15,9 +15,7 @@ body {
 .input-group-addon {
     width: 150px;
 }
-.jumbotronBackgroundColor {
-      background-color: #0074f1 !important;
-}
+
 .tableTopHeader {
       padding: 1rem;
       display: flex;
@@ -43,4 +41,50 @@ body {
 .middle {
   flex-flow: inherit !important;
   padding: 3rem 22rem 1rem 0rem;
+}
+.container_center_text {
+  text-align: center;
+}
+.navbar_action {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: white;
+  position: fixed;
+  top: 0;
+  width: 100%;    
+}
+.navbar_item {
+  float: left;
+
+}
+
+li a {
+  display: block;
+  color: #111;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #da6;
+  text-decoration: none;
+  color:white;
+}
+.active {
+  background-color: #824;
+  color:white;
+}
+
+.button_burgundy {
+    background-color: #824 !important;
+}
+.input_area {
+  display: inline-flex;
+
+}
+.generate_button_class {
+  padding: 1rem;
 }
